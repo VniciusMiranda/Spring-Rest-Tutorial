@@ -4,15 +4,21 @@ import com.Miranda.osworks.osworksapi.domain.model.Client;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @RestController
 public class ClientController {
 
-    @GetMapping("/clients")
-    public String list(){
+    @PersistenceContext
+    private EntityManager manager;
 
-        return "test";
+    @GetMapping("/clients")
+    public List<Client> list(){
+        String s = "from something";
+        return manager.createQuery("from Client", Client.class)
+                .getResultList();
     }
 }

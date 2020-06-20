@@ -8,7 +8,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long clientId;
+    private Long clientId;
 
     @Column(name = "name")
     private String name;
@@ -19,11 +19,11 @@ public class Client {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public long getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(long clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 

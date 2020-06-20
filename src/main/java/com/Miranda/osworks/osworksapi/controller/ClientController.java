@@ -1,6 +1,8 @@
 package com.Miranda.osworks.osworksapi.controller;
 
 import com.Miranda.osworks.osworksapi.domain.model.Client;
+import com.Miranda.osworks.osworksapi.domain.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,13 +14,16 @@ import java.util.List;
 @RestController
 public class ClientController {
 
-    @PersistenceContext
-    private EntityManager manager;
+    private final ClientRepository clientRepository;
+
+    @Autowired
+    public ClientController(ClientRepository clientRepository){
+        this.clientRepository = clientRepository;
+    }
+
 
     @GetMapping("/clients")
     public List<Client> list(){
-        String s = "from something";
-        return manager.createQuery("from Client", Client.class)
-                .getResultList();
+        return clientRepository.findAll();
     }
 }

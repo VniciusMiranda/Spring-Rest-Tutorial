@@ -42,7 +42,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client add(@RequestBody Client client) {
+    public Client add(@Valid @RequestBody Client client) {
 
         return clientRepository.save(client);
     }

@@ -1,10 +1,8 @@
 package com.Miranda.osworks.osworksapi.domain.model;
 
-import org.hibernate.annotations.NotFound;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -15,19 +13,20 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
 
-    @Column(name = "name")
     @Size(max = 60)
     @NotBlank
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "email_address")
     @Size(max = 255)
     @NotBlank
+    @Email
+    @Column(name = "email_address")
     private String emailAddress;
 
-    @Column(name = "phone_number")
     @Size(max = 20)
     @NotBlank
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public Long getClientId() {

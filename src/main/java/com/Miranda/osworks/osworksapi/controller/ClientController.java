@@ -18,15 +18,12 @@ import java.util.Optional;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientRepository clientRepository;
-
-    private final SignUpClientService signUpClientService;
+    @Autowired
+    private ClientRepository clientRepository;
 
     @Autowired
-    public ClientController(ClientRepository clientRepository, SignUpClientService signUpClientService) {
-        this.signUpClientService = signUpClientService;
-        this.clientRepository = clientRepository;
-    }
+    private SignUpClientService signUpClientService;
+
 
     @GetMapping
     public ResponseEntity<List<Client>> list() {

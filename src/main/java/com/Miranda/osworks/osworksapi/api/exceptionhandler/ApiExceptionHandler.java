@@ -19,6 +19,32 @@ import java.util.ArrayList;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers,
+                                                                  HttpStatus status,
+                                                                  WebRequest request) {
+
+
+        System.out.println("EXCEPTION HANDLING: " + status.value());
+        var errorPresentations = new ArrayList<Problem.Field>();
+
+        for(ObjectError error : ex.getBindingResult().getAllErrors()){
+
+            errorPresentations.add(new Problem.Field(
+                    ((FieldError) error).getObjectName(),
+                     error.getDefaultMessage()
+            ));
+        }
+
+        var problem = new  Problem(status.value(), LocalDateTime.now(),
+                "One or more fields are invalid." +
+                    "Try again with new values.");
+        problem.setFields(errorPresentations);
+        System.out.println("PROBLEM STATUS:" + problem.getStatus());
+        return super.handleExceptionInternal(ex, problem, headers, status, request);
+    }
+
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<Object> domainHandle(DomainException ex, WebRequest request){
 
@@ -30,27 +56,4 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
-
-        var errorPresentations = new ArrayList<Problem.Field>();
-
-        for(ObjectError error : ex.getBindingResult().getAllErrors()){
-
-            errorPresentations.add(new Problem.Field(
-                    ((FieldError) error).getObjectName(),
-                     error.getDefaultMessage()
-            ));
-        }
-
-        var problem = new  Problem(400, LocalDateTime.now(),
-                "One or more fields are invalid." +
-                    "Try again with new values.");
-        problem.setFields(errorPresentations);
-
-        return super.handleExceptionInternal(ex, problem, headers, status, request);
-    }
 }

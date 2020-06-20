@@ -30,7 +30,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         for(ObjectError error : ex.getBindingResult().getAllErrors()){
 
             errorPresentations.add(new Problem.Field(
-                    ((FieldError) error).getObjectName(),
+                    ((FieldError) error).getField(),
                      error.getDefaultMessage()
             ));
         }

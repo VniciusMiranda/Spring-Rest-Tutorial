@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Provider;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/service-order")
@@ -19,7 +19,7 @@ public class ServiceOrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ServiceOrder create(@RequestBody ServiceOrder serviceOrder) {
+    public ServiceOrder create(@Valid @RequestBody ServiceOrder serviceOrder) {
         return managementService.create(serviceOrder);
     }
 

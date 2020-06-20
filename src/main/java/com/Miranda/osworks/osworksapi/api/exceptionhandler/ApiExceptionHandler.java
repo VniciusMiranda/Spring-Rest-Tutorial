@@ -39,7 +39,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 "One or more fields are invalid." +
                     "Try again with new values.");
         problem.setFields(errorPresentations);
-        System.out.println("PROBLEM STATUS:" + problem.getStatus());
+
         return super.handleExceptionInternal(ex, problem, headers, status, request);
     }
 

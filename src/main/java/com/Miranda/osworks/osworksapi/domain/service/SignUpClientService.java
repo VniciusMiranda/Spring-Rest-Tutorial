@@ -14,6 +14,10 @@ public class SignUpClientService {
     private ClientRepository clientRepository;
 
     public Client save(Client client){
+        if(clientRepository.findAll().isEmpty())
+            return clientRepository.save(client);
+
+
         Client existingClient = clientRepository.findClientByEmailAddress(client.getEmailAddress());
 
         if(existingClient != null && !existingClient.equals(client)){

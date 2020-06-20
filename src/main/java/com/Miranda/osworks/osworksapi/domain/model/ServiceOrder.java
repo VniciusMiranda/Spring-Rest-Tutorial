@@ -1,5 +1,7 @@
 package com.Miranda.osworks.osworksapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,13 +18,18 @@ public class ServiceOrder {
     private Client client;
 
     private String description;
+
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    private ServiceOrderStatus serviceOrderStatus;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private ServiceOrderStatus status;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime openingDate;
-    private LocalDateTime finishDate;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime finishingDate;
 
     public Long getId() {
         return id;
@@ -56,12 +63,12 @@ public class ServiceOrder {
         this.price = price;
     }
 
-    public ServiceOrderStatus getServiceOrderStatus() {
-        return serviceOrderStatus;
+    public ServiceOrderStatus getStatus() {
+        return status;
     }
 
-    public void setServiceOrderStatus(ServiceOrderStatus serviceOrderStatus) {
-        this.serviceOrderStatus = serviceOrderStatus;
+    public void setStatus(ServiceOrderStatus serviceOrderStatus) {
+        this.status = serviceOrderStatus;
     }
 
     public LocalDateTime getOpeningDate() {
@@ -72,12 +79,12 @@ public class ServiceOrder {
         this.openingDate = openingDate;
     }
 
-    public LocalDateTime getFinishDate() {
-        return finishDate;
+    public LocalDateTime getFinishingDate() {
+        return finishingDate;
     }
 
-    public void setFinishDate(LocalDateTime finishDate) {
-        this.finishDate = finishDate;
+    public void setFinishingDate(LocalDateTime finishDate) {
+        this.finishingDate = finishDate;
     }
 
     @Override
@@ -89,13 +96,13 @@ public class ServiceOrder {
                 client.equals(that.client) &&
                 description.equals(that.description) &&
                 price.equals(that.price) &&
-                serviceOrderStatus == that.serviceOrderStatus &&
+                status == that.status &&
                 openingDate.equals(that.openingDate) &&
-                finishDate.equals(that.finishDate);
+                finishingDate.equals(that.finishingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, description, price, serviceOrderStatus, openingDate, finishDate);
+        return Objects.hash(id, client, description, price, status, openingDate, finishingDate);
     }
 }

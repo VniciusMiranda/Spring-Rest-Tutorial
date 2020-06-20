@@ -11,7 +11,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clientId;
+    private Long id;
 
     @Size(max = 60)
     @NotBlank
@@ -29,12 +29,12 @@ public class Client {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public Long getClientId() {
-        return clientId;
+    public Long getId() {
+        return id;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setId(Long clientId) {
+        this.id = clientId;
     }
 
     public String getName() {
@@ -67,7 +67,7 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return clientId == client.clientId &&
+        return id.equals(client.id)  &&
                 name.equals(client.name) &&
                 emailAddress.equals(client.emailAddress) &&
                 phoneNumber.equals(client.phoneNumber);
@@ -75,6 +75,6 @@ public class Client {
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientId, name, emailAddress, phoneNumber);
+        return Objects.hash(id, name, emailAddress, phoneNumber);
     }
 }

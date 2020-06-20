@@ -6,11 +6,11 @@ create table service_order (
     price decimal(10,2),
     status varchar(20) not null,
     opening_date datetime not null,
-    finishing_date datetime not null,
+    finishing_date datetime,
 
     primary key (id)
 );
 
 
 alter table service_order add constraint fk_service_order_client
-foreign key (client_id) references client (client_id)
+foreign key (client_id) references client (id);

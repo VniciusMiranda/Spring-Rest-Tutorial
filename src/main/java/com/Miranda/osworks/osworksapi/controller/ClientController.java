@@ -48,9 +48,10 @@ public class ClientController {
     }
 
     @PutMapping("{clientId}")
-    public ResponseEntity<Client> update( @PathVariable Long clientId,@Valid @RequestBody Client client) {
+    public ResponseEntity<Client> update(@Valid @RequestBody Client client,
+                                         @PathVariable Long clientId) {
 
-        client.setClientId(clientId);
+        client.setId(clientId);
         return !clientRepository.existsById(clientId) ? ResponseEntity.notFound().build() :
                 ResponseEntity.ok(signUpClientService.save(client));
     }

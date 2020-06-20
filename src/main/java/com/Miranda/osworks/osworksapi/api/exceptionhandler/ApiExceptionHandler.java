@@ -25,8 +25,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatus status,
                                                                   WebRequest request) {
 
-
-        System.out.println("EXCEPTION HANDLING: " + status.value());
         var errorPresentations = new ArrayList<Problem.Field>();
 
         for(ObjectError error : ex.getBindingResult().getAllErrors()){

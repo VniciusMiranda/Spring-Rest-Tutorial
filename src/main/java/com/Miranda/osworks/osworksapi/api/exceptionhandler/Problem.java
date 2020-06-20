@@ -1,5 +1,7 @@
 package com.Miranda.osworks.osworksapi.api.exceptionhandler;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import java.util.List;
 * Represents the message that will be given for the user of the API
 * if some exception happen
 * */
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Problem {
 
      private Integer status;
@@ -27,15 +31,20 @@ public class Problem {
     }
 
 
-    public Problem(Integer status, LocalDateTime localDateTime, String title,
-                   List<Field> fields) {
+    public Problem(Integer status, LocalDateTime localDateTime, String title) {
 
         this.status = status;
         this.localDateTime = localDateTime;
         this.title = title;
-        this.fields = fields;
     }
 
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
 
     public Integer getStatus() {
         return status;

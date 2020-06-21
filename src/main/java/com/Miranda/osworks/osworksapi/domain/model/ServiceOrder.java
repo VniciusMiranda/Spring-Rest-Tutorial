@@ -1,5 +1,7 @@
 package com.Miranda.osworks.osworksapi.domain.model;
 
+import com.Miranda.osworks.osworksapi.domain.exception.DomainException;
+
 import javax.persistence.*;
 
 import java.math.BigDecimal;
@@ -30,6 +32,17 @@ public class ServiceOrder {
     @OneToMany(mappedBy = "serviceOrder")
     private List<Comment> comments;
 
+    public boolean isOpen(){
+        return ServiceOrderStatus.OPEN.equals(this.getStatus());
+    }
+
+    public void finish(){
+        if(!isOpen())
+            throw new DomainException("service order cannot be canceled");
+
+        this.setStatus(ServiceOrderStatus.FINISHED);
+        setFinishingDate(OffsetDateTime.now());
+    }
 
     public List<Comment> getComments() {
         return comments;

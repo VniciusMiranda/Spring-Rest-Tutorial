@@ -28,6 +28,7 @@ public class ManagementServiceOrderService {
     @Autowired
     private CommentRepository commentRepository;
 
+
     public ServiceOrder create(ServiceOrder serviceOrder){
         Client client = clientRepository.findById(serviceOrder.getClient().getId())
                 .orElseThrow(() -> new DomainException("client not found"));
@@ -39,6 +40,17 @@ public class ManagementServiceOrderService {
 
         return serviceOrderRepository.save(serviceOrder);
     }
+
+
+    public void finish(Long serviceOrderId){
+        ServiceOrder serviceOrder = serviceOrderRepository.findById(serviceOrderId)
+                .orElseThrow(() -> new DomainException("client not found"));
+
+        serviceOrder.finish();
+
+        serviceOrderRepository.save(serviceOrder);
+    }
+
 
     public Comment addComment(String description, Long serviceOrderId){
         ServiceOrder serviceOrder = serviceOrderRepository.findById(serviceOrderId)

@@ -1,32 +1,20 @@
-package com.Miranda.osworks.osworksapi.domain.model;
+package com.Miranda.osworks.osworksapi.api.model;
 
-import javax.persistence.*;
+import com.Miranda.osworks.osworksapi.domain.model.ServiceOrderStatus;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
-@Entity
-public class ServiceOrder {
+public class ServiceOrderModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private Client client;
-
+    private ClientModel client;
     private String description;
-
     private BigDecimal price;
-
-    @Enumerated(EnumType.STRING)
-
     private ServiceOrderStatus status;
-
     private OffsetDateTime openingDate;
-
     private OffsetDateTime finishingDate;
+
 
     public Long getId() {
         return id;
@@ -36,11 +24,11 @@ public class ServiceOrder {
         this.id = id;
     }
 
-    public Client getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientModel client) {
         this.client = client;
     }
 
@@ -64,8 +52,8 @@ public class ServiceOrder {
         return status;
     }
 
-    public void setStatus(ServiceOrderStatus serviceOrderStatus) {
-        this.status = serviceOrderStatus;
+    public void setStatus(ServiceOrderStatus status) {
+        this.status = status;
     }
 
     public OffsetDateTime getOpeningDate() {
@@ -82,24 +70,5 @@ public class ServiceOrder {
 
     public void setFinishingDate(OffsetDateTime finishingDate) {
         this.finishingDate = finishingDate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ServiceOrder that = (ServiceOrder) o;
-        return id.equals(that.id) &&
-                client.equals(that.client) &&
-                description.equals(that.description) &&
-                price.equals(that.price) &&
-                status == that.status &&
-                openingDate.equals(that.openingDate) &&
-                finishingDate.equals(that.finishingDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, client, description, price, status, openingDate, finishingDate);
     }
 }

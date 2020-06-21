@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 @ControllerAdvice
@@ -35,7 +36,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             ));
         }
 
-        var problem = new  Problem(status.value(), LocalDateTime.now(),
+        var problem = new  Problem(status.value(), OffsetDateTime.now(),
                 "One or more fields are invalid." +
                     "Try again with new values.");
         problem.setFields(errorPresentations);
@@ -48,7 +49,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         var status = HttpStatus.BAD_REQUEST;
 
-        var problem = new Problem(status.value(),LocalDateTime.now(), ex.getMessage());
+        var problem = new Problem(status.value(),OffsetDateTime.now(), ex.getMessage());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }

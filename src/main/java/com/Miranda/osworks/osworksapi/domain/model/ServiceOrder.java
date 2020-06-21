@@ -11,6 +11,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
@@ -37,10 +38,10 @@ public class ServiceOrder {
     private ServiceOrderStatus status;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime openingDate;
+    private OffsetDateTime openingDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime finishingDate;
+    private OffsetDateTime finishingDate;
 
     public Long getId() {
         return id;
@@ -82,20 +83,20 @@ public class ServiceOrder {
         this.status = serviceOrderStatus;
     }
 
-    public LocalDateTime getOpeningDate() {
+    public OffsetDateTime getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(LocalDateTime openingDate) {
+    public void setOpeningDate(OffsetDateTime openingDate) {
         this.openingDate = openingDate;
     }
 
-    public LocalDateTime getFinishingDate() {
+    public OffsetDateTime getFinishingDate() {
         return finishingDate;
     }
 
-    public void setFinishingDate(LocalDateTime finishDate) {
-        this.finishingDate = finishDate;
+    public void setFinishingDate(OffsetDateTime finishingDate) {
+        this.finishingDate = finishingDate;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.Miranda.osworks.osworksapi.controller;
+package com.Miranda.osworks.osworksapi.api.controller;
 
 import com.Miranda.osworks.osworksapi.domain.model.Client;
 import com.Miranda.osworks.osworksapi.domain.repository.ClientRepository;

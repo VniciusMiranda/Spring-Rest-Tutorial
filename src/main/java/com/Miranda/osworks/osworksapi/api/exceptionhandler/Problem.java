@@ -3,6 +3,7 @@ package com.Miranda.osworks.osworksapi.api.exceptionhandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class Problem {
 
      private Integer status;
-    private LocalDateTime localDateTime;
+    private OffsetDateTime localDateTime;
     private String title;
     private List<Field> fields;
 
@@ -46,7 +47,7 @@ public class Problem {
     }
 
 
-    public Problem(Integer status, LocalDateTime localDateTime, String title) {
+    public Problem(Integer status, OffsetDateTime localDateTime, String title) {
 
         this.status = status;
         this.localDateTime = localDateTime;
@@ -69,11 +70,11 @@ public class Problem {
         this.status = status;
     }
 
-    public LocalDateTime getLocalDateTime() {
+    public OffsetDateTime getLocalDateTime() {
         return localDateTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
+    public void setLocalDateTime(OffsetDateTime localDateTime) {
         this.localDateTime = localDateTime;
     }
 

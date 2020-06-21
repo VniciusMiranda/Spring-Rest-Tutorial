@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Service
 public class ManagementServiceOrderService {
@@ -28,7 +29,7 @@ public class ManagementServiceOrderService {
 
         serviceOrder.setClient(client);
         serviceOrder.setStatus(ServiceOrderStatus.OPEN);
-        serviceOrder.setOpeningDate(LocalDateTime.now());
+        serviceOrder.setOpeningDate(OffsetDateTime.now());
 
         return serviceOrderRepository.save(serviceOrder);
     }

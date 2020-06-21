@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,10 +24,20 @@ public class ServiceOrder {
     @Enumerated(EnumType.STRING)
 
     private ServiceOrderStatus status;
-
     private OffsetDateTime openingDate;
-
     private OffsetDateTime finishingDate;
+
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<Comment> comments;
+
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
         return id;

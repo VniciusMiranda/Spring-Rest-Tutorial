@@ -51,6 +51,11 @@ public class ServiceOrderController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("{serviceOrderId}/finish")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finish(@PathVariable Long serviceOrderId){
+        managementService.finish(serviceOrderId);
+    }
 
     private ServiceOrderModel toModel(ServiceOrder serviceOrder){
         return modelMapper.map(serviceOrder, ServiceOrderModel.class);

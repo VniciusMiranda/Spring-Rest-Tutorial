@@ -2,6 +2,7 @@ package com.Miranda.osworks.osworksapi.domain.service;
 
 
 import com.Miranda.osworks.osworksapi.domain.exception.DomainException;
+import com.Miranda.osworks.osworksapi.domain.exception.EntityNotFoundException;
 import com.Miranda.osworks.osworksapi.domain.model.Client;
 import com.Miranda.osworks.osworksapi.domain.model.Comment;
 import com.Miranda.osworks.osworksapi.domain.model.ServiceOrder;
@@ -41,7 +42,7 @@ public class ManagementServiceOrderService {
 
     public Comment addComment(String description, Long serviceOrderId){
         ServiceOrder serviceOrder = serviceOrderRepository.findById(serviceOrderId)
-                .orElseThrow(() -> new DomainException("service does not exist"));
+                .orElseThrow(() -> new EntityNotFoundException("entity not found"));
 
 
         Comment comment = new Comment();

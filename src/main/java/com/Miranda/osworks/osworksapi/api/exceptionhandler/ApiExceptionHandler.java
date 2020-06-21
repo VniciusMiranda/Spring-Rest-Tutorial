@@ -2,6 +2,7 @@ package com.Miranda.osworks.osworksapi.api.exceptionhandler;
 
 
 import com.Miranda.osworks.osworksapi.domain.exception.DomainException;
+import com.Miranda.osworks.osworksapi.domain.exception.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> domainHandle(DomainException ex, WebRequest request){
 
         var status = HttpStatus.BAD_REQUEST;
+
+        var problem = new Problem(status.value(),OffsetDateTime.now(), ex.getMessage());
+
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> entityNotFoundHandle(DomainException ex, WebRequest request){
+
+        var status = HttpStatus.NOT_FOUND;
 
         var problem = new Problem(status.value(),OffsetDateTime.now(), ex.getMessage());
 
